@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Get CMC Quotes</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+		<body>
+			<form action="viewq" method="post">
+				 {% for message in get_flashed_messages()%}
+				 	<p> {{message}} </p>
+				 {% endfor %}
+				 <br><br>
+				 <h1>Favourite Tokens/Coins Quotes from CMC</h1>
+				 <br><br>
+				 <p>Quotes will be in both USD and {{ curr }}</p>
+				 <p>Default coins are: {{ favcoins }} or... </p>
+				 <br>
+			     <p>Enter your favourite token/coins...Format: BTC,CRO,LTC </p>
+			     <br>
+			     <input type="text" name="coin_input">
+			     <br><br><br>
+			     <input type="submit" value="GET COINS Quotes"  id="coins">
+			 </form>
+		</body>
+	</head>
+</html>

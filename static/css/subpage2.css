@@ -1,0 +1,39 @@
+body {
+	background-color:  darkorchid;
+	text-align:  center;
+}
+
+p {
+	color:  cyan;
+	font-family:  fantasy;
+	font-size:  1.8em;
+	margin:  30px;
+}
+
+input {
+	color: navajowhite;
+	background-color: deepskyblue;
+	width:  200px;
+	height:  50px;
+	margin: 20px;
+	border: navy;
+	border-radius: 10px;
+	font-family: Shanti;
+	text-align: center;
+	font-size: 1.3em;
+}
+
+input:focus {
+	border:  solid 5px #00FFCE;
+}
+
+#rtn {
+	background-color: palevioletred;
+	color: burlywood;
+	width: 200px;
+}
+
+#viewq:hover {
+	background-color: greenyellow;
+	cursor:  pointer;
+}

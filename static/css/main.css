@@ -1,0 +1,39 @@
+body {
+	background-color:  slategray;
+	text-align:  center;
+}
+
+p {
+	color:  cyan;
+	font-family:  Shanti;
+	font-size:  1.5em;
+	margin:  30px;
+}
+
+input {
+	background-color: yellow;
+	color: darkmagenta;
+	width:  320px;
+	height:  40px;
+	margin: 20px;
+	border: navy;
+	border-radius: 10px;
+	font-family: Shanti;
+	text-align: center;
+	font-size: 1.3em;
+}
+
+input:focus {
+	border:  solid 5px #00FFCE;
+}
+
+#viewq {
+	background-color: palevioletred;
+	color: white;
+	width: 200px;
+}
+
+#viewq:hover {
+	background-color: greenyellow;
+	cursor:  pointer;
+}
