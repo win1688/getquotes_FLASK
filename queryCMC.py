@@ -3,6 +3,7 @@ from flask import Markup
 
 import pprint
 import json
+import os
 
 def testfunction():
 	msg1 = Markup('this is line 1 <br>')
@@ -11,6 +12,21 @@ def testfunction():
 	paramsg = msg1 + msg2 + msg3
 	return(paramsg)
 
+def retrieveAPI_KEY():
+#
+# alternate methods for hiding API-KEY
+#
+	with open('.env', 'r') as file:
+		line = file.readline()
+		os.environ[line[0:line.find('=')]] = line[line.find('=') + 1:]
+
+	if 'cmcAPI_KEY' in os.environ:
+		API_KEY = os.environ['cmcAPI_KEY']
+#		print('\n' + API_KEY + '\n')
+		return(API_KEY)
+	else:
+		print('cmcAPI_KEY missing in .evn file!! Get your own API Key into .env file before running code.\n')
+		print('Format: cmcAPI_KEY=abcdefuuuddddkkkkgggadkfhakdj  (without quotes and CR) \n')
 
 def getSGDUSDrate():
 	## Currency Rate Query API ##<<------------------------------------
@@ -40,12 +56,12 @@ def getSGDUSDrate():
 	return(exUSDSGD)
 
 
-def getCMCquotesRESTapi(para1):
+def getCMCquotesRESTapi(usdrate):
 
 	## CMC QUERY API ##<<------------------------------------
 	apiendpoint_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
-	apikey = 'b24cd75d-db93-4ed2-9a17-f13c4e810c17'
+	apikey = retrieveAPI_KEY()
 
 	querycoins = { 
     	           'symbol':'LTC,CAKE,BNB,CRO,DFI,BTC,MATIC' }
@@ -71,7 +87,7 @@ def getCMCquotesRESTapi(para1):
 	#pprint.pprint(data)                          ## Print JSON data read from file :/cmcdata.json
 
 #	exUSDSGD = getSGDUSDrate()
-	exUSDSGD = para1
+	exUSDSGD = usdrate
 	exSGDUSD = round(1/exUSDSGD, 4)
 
 	dispaltcolor = 0
@@ -109,7 +125,7 @@ def getCMCquotesRESTapi(para1):
 		if dispaltcolor < 1: 
 			disptext = disptext + Markup('<font color="#71EFA3"> ' + tokensymbol + ' is US$' + str(curr_price) +
     	                      ' / S$' + str(curr_priceSGD) +
-        	                  ' #----#   Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
+        	                  ' <span class="tab"></span>   Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
             	              str(perchg30d) + '% <<< ------</font> <br>') 
 			dispaltcolor = 1
 		else:

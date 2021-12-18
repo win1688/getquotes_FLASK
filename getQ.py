@@ -16,7 +16,7 @@ viewq = Blueprint(__name__, "viewq")
 
 @views.route("/")
 def home():
-	msg1 = Markup('###  Version 0.9a HOME Page - This version only displays my favourite Crypto Tokens <br>')
+	msg1 = Markup('###  Version 1.0 HOME Page - This version only displays my favourite Crypto Tokens <br>')
 	msg2 = Markup('###     next version will display the tokens you entered below <br>')
 	flash(msg1 + msg2)
 	return render_template("index.html", favcoins="CRO,CAKE,LTC,MATIC,BNB", curr="SGD")

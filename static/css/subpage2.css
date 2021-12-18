@@ -16,6 +16,11 @@ p {
 	text-align: left;
 }
 
+.tab {
+	display: inline-block;
+	margin-left: : 40px;
+}
+
 input {
 	color: darkslategrey;
 	background-color: deepskyblue;

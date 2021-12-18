@@ -3,6 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Display CMC Quotes</title>
+		<style>
+			.tab {
+				display:  inline-block;
+				margin-left: 60px;
+			}
+		</style>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/subpage2.css')}}">
 		<body>
 			<h1>USD-SGD rate = {{exrate1}} **** SGD-USD {{exrate2}}</h1>

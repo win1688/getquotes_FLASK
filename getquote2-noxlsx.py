@@ -12,7 +12,8 @@ from datetime import datetime
 import pprint
 import json
 
-## CMC API
+
+## CMC QUERY API ##<<------------------------------------
 apiendpoint_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
 ## xapiendpoint_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC,LTC,CAKE,BNB'
@@ -34,8 +35,16 @@ apidata = session.get(apiendpoint_url, params=querycoins)
 #apidata = session.get(apiendpoint_url)
 #pprint.pprint(json.loads(apidata.text))    ##<--- print if need to debug 
 
+dataall = json.loads(apidata.text)['data']
 
-## Currency Rate API
+#bnbprice = json.loads(apidata.text)['data']['BNB']['quote']['USD']['price']
+#print("  --->> " + str(bnbprice) + " <---")
+
+data = dataall
+#pprint.pprint(data)                          ## Print JSON data read from file :/cmcdata.json
+
+
+## Currency Rate Query API ##<<------------------------------------
 api_exch_url = 'https://freecurrencyapi.net/api/v2/latest?apikey=1b45ee90-501b-11ec-8902-3377424281a1&base_currency=USD'
 
 headers = {
@@ -65,48 +74,35 @@ print('#================================================#')
 ##
 #data = readjson['data']
 
-dataall = json.loads(apidata.text)['data']
-data = dataall
 
-
-#print(data)                          ## Print JSON data read from file :/cmcdata.json
-
-for lv01 in data:
-#    print(lv01)
-    nest1 = data[lv01]
-    tokensymbol = lv01
-#    print(nest1)                     ## Print retrived Nested json data
-    date_updated = nest1['last_updated']
-    for lv02 in nest1:
-        nest2 = nest1[lv02]
-        tp = json.loads(data)['last_updated']['BTC']['USD']
-        print('  ## ' + tp + ' ## \n')
-        if 'name' in lv02:
-            tokenname = nest1[lv02]
-#            tokendetails = json.loads(nest1.text)[tokensymbol]
-#            print('\n lv02 ' + lv02 + '   \n')
-#            print('\n==============> ' + tokenname + ' <=============')
-        if 'quote' in lv02:
-            for lv03 in nest2:
-                nest3 = nest2[lv03]
-#                print(nest3)            ## Inner most NESTED Dict [price info]
-                if 'USD' in lv03:
-                    curr_price = round(nest3['price'],2)
-                    curr_priceSGD = round(nest3['price']*exUSDSGD,2)
-                    perchg1h = round(nest3['percent_change_1h'],2)
-                    perchg24h = round(nest3['percent_change_24h'],2)
-                    perchg30d = round(nest3['percent_change_30d'],2) 
-                    perchg24hEx = round(nest3['percent_change_24h'],2)/100
-                    perchg30dEx = round(nest3['percent_change_30d'],2)/100 
-                    print('CURR Price of ' + tokensymbol + ' is US$' + str(curr_price) +
+for coinsymbol in data:
+#    print(coinsymbol)
+    nest1 = data[coinsymbol]
+    tokensymbol = coinsymbol
+#    print("  --->>>>> data[coinsymbol] value <<<<<---  ")
+#    print(nest1)
+#    print('\n')
+#    quoteUSDprice = str(nest1['quote']['USD']['price'])
+    quoteUSDprice = nest1['quote']['USD']['price']
+#    perchg1h = str(nest1['quote']['USD']['percent_change_1h'])
+    perchg1h = nest1['quote']['USD']['percent_change_1h']
+#    perchg24h = str(nest1['quote']['USD']['percent_change_24h'])
+    perchg24h = nest1['quote']['USD']['percent_change_24h']
+#    perchg30d = str(nest1['quote']['USD']['percent_change_30d'])
+    perchg30d = nest1['quote']['USD']['percent_change_30d']
+    coinID = nest1['id']
+#    print('id: ' + str(nest1['id']) + ' 1h% :' + str(nest1['quote']['USD']['percent_change_1h']) +'\n' )
+#    print('id: ' + str(nest1['id']) + ' 24h% :' + str(nest1['quote']['USD']['percent_change_24h']) + '\n' )
+#    print('id: ' + str(nest1['id']) + ' 7d% :' + str(nest1['quote']['USD']['percent_change_7d']) + '\n' )
+#    print(coinsymbol)                     ## Print retrived Nested json data
+#    print("  --->>>>>                  <<<<<---  ")
+    curr_price = round(quoteUSDprice,2)
+    curr_priceSGD = round(quoteUSDprice*exUSDSGD,2)
+    perchg1h = round(perchg1h,2)
+    perchg24h = round(perchg24h,2)
+    perchg30d = round(perchg30d,2)
+    print('CURR Price of ' + tokensymbol + ' is US$' + str(curr_price) +
                           ' / S$' + str(curr_priceSGD) +
                           ' Changes last 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
-                          str(perchg30d) + '% <<<----------\n')
-                    curr_row = [tokenname, tokensymbol, curr_price, curr_priceSGD, perchg24hEx, perchg30dEx, date_updated]
-
-
-
-
-
-
+                          str(perchg30d) + '% <<< ----------\n') 
 
