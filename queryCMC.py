@@ -25,8 +25,9 @@ def retrieveAPI_KEY():
 #		print('\n' + API_KEY + '\n')
 		return(API_KEY)
 	else:
-		print('cmcAPI_KEY missing in .evn file!! Get your own API Key into .env file before running code.\n')
-		print('Format: cmcAPI_KEY=abcdefuuuddddkkkkgggadkfhakdj  (without quotes and CR) \n')
+#		print('cmcAPI_KEY missing in .evn file!! Get your own API Key into .env file before running code.\n')
+#		print('Format: cmcAPI_KEY=abcdefuuuddddkkkkgggadkfhakdj  (without quotes and CR) \n')
+		return(None)
 
 def getSGDUSDrate():
 	## Currency Rate Query API ##<<------------------------------------
@@ -62,6 +63,9 @@ def getCMCquotesRESTapi(usdrate):
 	apiendpoint_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
 	apikey = retrieveAPI_KEY()
+	if apikey == None:
+		return(None)
+
 
 	querycoins = { 
     	           'symbol':'LTC,CAKE,BNB,CRO,DFI,BTC,MATIC' }
@@ -131,7 +135,7 @@ def getCMCquotesRESTapi(usdrate):
 		else:
 			disptext = disptext + Markup('<font color="#FF9966">' + tokensymbol + ' is US$' + str(curr_price) +
            		              ' / S$' + str(curr_priceSGD) +
-               		          ' #----#   Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
+               		          ' <span class="tab"></span> Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
                    		      str(perchg30d) + '% <<< ------</font> <br>') 
 			dispaltcolor = 0
 	return(disptext)

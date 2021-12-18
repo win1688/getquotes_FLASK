@@ -35,9 +35,19 @@ def altcoins():
 	now = datetime.now()
 	dt_string = now.strftime("%d/%m/%Y Timezone GMT+8 : %H:%M:%S")
 	fc = request.form['coin_input'] 
-	paramsg = getCMCquotesRESTapi(exUSDSGD)
-	flash("Quotes from CMC as follows  " + paramsg)
-	return render_template("dispquotes.html", exrate1=str(exUSDSGD), exrate2=str(exSGDUSD), currDT=dt_string, userinput=str(fc))
+	cmcquotes = getCMCquotesRESTapi(exUSDSGD)
+	if cmcquotes == None:
+		msg0 = Markup('You need to get your own API_KEY from https://pro.coinmarketcap.com/signup/  <br>')
+		msg1 = Markup('to run this program. <br>')
+		msg2 = Markup('Input your API KEY from CMC into  .env file in the same directory as your python script <br><br><br>')
+		msg3 = Markup('Format: <span class="tab"></span> cmcAPI_KEY=abcdefuuuddddkkkkgggadkfhakdj  <br><br><br>')
+		msg4 = Markup('<em>Note: without quotes and CR </em> <br>')
+		flash(msg0 + msg1 + msg2 + msg3 + msg4)
+		return render_template("noAPIKEY.html")
+	else:
+		msg1 = Markup('Quotes from CMC as follows     <span class="tab"></span>       Changes last 1h / 24h / 30d ')
+		flash(msg1 + cmcquotes)
+		return render_template("dispquotes.html", exrate1=str(exUSDSGD), exrate2=str(exSGDUSD), currDT=dt_string, userinput=str(fc))
 
 @app.route("/viewxxxx")
 def index():

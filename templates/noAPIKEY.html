@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Error - API_KEY</title>
+		<style>
+			.tab {
+				display:  inline-block;
+				margin-left: 60px;
+			}
+		</style>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/subpage2.css')}}">
+		<body>
+			<h1>Missing .env file or missing API_KEY in .env file</h1>
+			<form action="/" method="get">
+				 {% for message in get_flashed_messages()%}
+				 	<p> {{message}} </p>
+				 {% endfor %}
+				 <br>
+				 <p> Fix error and try again...<span class="tab"></span>   :-) </p>
+			     <br><br>
+			     <input type="submit" value="Back" id="diserror">
+			 </form>
+		</body>
+	</head>
+</html>
