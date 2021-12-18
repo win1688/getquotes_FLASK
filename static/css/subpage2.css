@@ -3,22 +3,29 @@ body {
 	text-align:  center;
 }
 
+h1{
+	color: yellow;
+}
+
+
 p {
 	color:  cyan;
-	font-family:  fantasy;
+	font-family:  ;
 	font-size:  1.8em;
 	margin:  30px;
+	text-align: left;
 }
 
 input {
-	color: navajowhite;
+	color: darkslategrey;
 	background-color: deepskyblue;
 	width:  200px;
 	height:  50px;
 	margin: 20px;
 	border: navy;
 	border-radius: 10px;
-	font-family: Shanti;
+	font-stretch:  semi-expanded;
+	font-family: sans-serif;
 	text-align: center;
 	font-size: 1.3em;
 }

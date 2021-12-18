@@ -40,7 +40,7 @@ def getSGDUSDrate():
 	return(exUSDSGD)
 
 
-def getCMCquotesRESTapi():
+def getCMCquotesRESTapi(para1):
 
 	## CMC QUERY API ##<<------------------------------------
 	apiendpoint_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
@@ -70,9 +70,11 @@ def getCMCquotesRESTapi():
 	data = dataall
 	#pprint.pprint(data)                          ## Print JSON data read from file :/cmcdata.json
 
-	exUSDSGD = getSGDUSDrate()
+#	exUSDSGD = getSGDUSDrate()
+	exUSDSGD = para1
 	exSGDUSD = round(1/exUSDSGD, 4)
 
+	dispaltcolor = 0
 	disptext = Markup(' :<br>')
 	for coinsymbol in data:
 #   	print(coinsymbol)
@@ -104,10 +106,18 @@ def getCMCquotesRESTapi():
 #                          ' / S$' + str(curr_priceSGD) +
 #                          ' Changes last 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
 #                          str(perchg30d) + '% <<< ----------\n') 
-		disptext = disptext + Markup(tokensymbol + ' is US$' + str(curr_price) +
-                          ' / S$' + str(curr_priceSGD) +
-                          ' #----#   Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
-                          str(perchg30d) + '% <<< ------<br>') 
+		if dispaltcolor < 1: 
+			disptext = disptext + Markup('<font color="#71EFA3"> ' + tokensymbol + ' is US$' + str(curr_price) +
+    	                      ' / S$' + str(curr_priceSGD) +
+        	                  ' #----#   Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
+            	              str(perchg30d) + '% <<< ------</font> <br>') 
+			dispaltcolor = 1
+		else:
+			disptext = disptext + Markup('<font color="#FF9966">' + tokensymbol + ' is US$' + str(curr_price) +
+           		              ' / S$' + str(curr_priceSGD) +
+               		          ' #----#   Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
+                   		      str(perchg30d) + '% <<< ------</font> <br>') 
+			dispaltcolor = 0
 	return(disptext)
 
 

@@ -5,22 +5,18 @@
 		<title>Display CMC Quotes</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/subpage2.css')}}">
 		<body>
-			<br><br>
-			<h1>Run python script to get CMC quotes</h1>
+			<h1>USD-SGD rate = {{exrate1}} **** SGD-USD {{exrate2}}</h1>
 			<br>
-			<p>display python script out here</p>
+			<p>Current token price as of : {{currDT}}</p>
 			<br>
 			<form action="/" method="get">
 				 {% for message in get_flashed_messages()%}
 				 	<p> {{message}} </p>
 				 {% endfor %}
-				 <br><br>
-				 <br><br>
-				 <p> ## $$$ ------ $$$ ## </p>
-				 <p>Hit back button on browser... </p>
 				 <br>
+				 <p> Your input : {{userinput}} </p>
 			     <br><br>
-			     <input type="submit" value="Good Luck!" id="disquotes">
+			     <input type="submit" value="Home Page" id="disquotes">
 			 </form>
 		</body>
 	</head>

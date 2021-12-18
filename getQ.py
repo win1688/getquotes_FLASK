@@ -1,5 +1,8 @@
-from flask import Flask, Blueprint, render_template, request, flash
+from flask import Flask, Blueprint, render_template, request, flash, Markup
 from requests import Request, Session
+from datetime import datetime
+
+from queryCMC import getCMCquotesRESTapi, getSGDUSDrate
 
 import json
 import pprint
@@ -13,7 +16,9 @@ viewq = Blueprint(__name__, "viewq")
 
 @views.route("/")
 def home():
-	flash(" ###  HOME Dir - CMC quotes of favourite coins to display here....!!! ")
+	msg1 = Markup('###  Version 0.9a HOME Page - This version only displays my favourite Crypto Tokens <br>')
+	msg2 = Markup('###     next version will display the tokens you entered below <br>')
+	flash(msg1 + msg2)
 	return render_template("index.html", favcoins="CRO,CAKE,LTC,MATIC,BNB", curr="SGD")
 #	return "home getq page"
 
@@ -22,23 +27,17 @@ def altcoins():
 #
 #	Get Exchange Rates
 #
-	api_exch_url = 'https://freecurrencyapi.net/api/v2/latest?apikey=1b45ee90-501b-11ec-8902-3377424281a1&base_currency=USD'
-	headers = {'Accepts': 'application/json'}
-	session = Session()
-	session.headers.update(headers)
-	exchngrates = session.get(api_exch_url)
-	pprint.pprint(json.loads(exchngrates.text))
-	exUSDSGD = json.loads(exchngrates.text)['data']['SGD']
+	exUSDSGD = getSGDUSDrate()
 	exSGDUSD = round(1/exUSDSGD, 4)
-	exratetext = ' ** SGD-USD rate = $' + str(exUSDSGD) + ' ** USD-SGD = $' + str(exSGDUSD) + ' ** '
 #
+#	Get Current Date/time
+#
+	now = datetime.now()
+	dt_string = now.strftime("%d/%m/%Y Timezone GMT+8 : %H:%M:%S")
 	fc = request.form['coin_input'] 
-#
-#
-	flash("VIEWQ Dir - Your favourite coins are : " + str(fc) + exratetext)
-	return render_template("dispquotes.html", favcoins=str(fc), curr="EUR")
-
-
+	paramsg = getCMCquotesRESTapi(exUSDSGD)
+	flash("Quotes from CMC as follows  " + paramsg)
+	return render_template("dispquotes.html", exrate1=str(exUSDSGD), exrate2=str(exSGDUSD), currDT=dt_string, userinput=str(fc))
 
 @app.route("/viewxxxx")
 def index():
