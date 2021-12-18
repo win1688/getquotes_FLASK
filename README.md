@@ -8,7 +8,8 @@ If you will need to get your own API-KEY and input into
 a .env file to run this script to get the quotes from CMC
 
 To get the quotes of your favourite coins edit queryCMC.py
-function getCMCquotesRESTapi()
+
+function :- getCMCquotesRESTapi()
 
 	querycoins = { 
     	           'symbol':'LTC,CAKE,BNB,CRO,DFI,BTC,MATIC' }
