@@ -129,13 +129,13 @@ def getCMCquotesRESTapi(usdrate):
 		if dispaltcolor < 1: 
 			disptext = disptext + Markup('<font color="#71EFA3"> ' + tokensymbol + ' is US$' + str(curr_price) +
     	                      ' / S$' + str(curr_priceSGD) +
-        	                  ' <span class="tab"></span>   Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
+        	                  ' <span class="tab"></span>  <span class="tab"></span>     ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
             	              str(perchg30d) + '% <<< ------</font> <br>') 
 			dispaltcolor = 1
 		else:
 			disptext = disptext + Markup('<font color="#FF9966">' + tokensymbol + ' is US$' + str(curr_price) +
            		              ' / S$' + str(curr_priceSGD) +
-               		          ' <span class="tab"></span> Changes last -- 1h/24h/30d  : ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
+               		          ' <span class="tab"></span>   <span class="tab"></span>   ' + str(perchg1h) + '% / ' + str(perchg24h) +'% / ' + 
                    		      str(perchg30d) + '% <<< ------</font> <br>') 
 			dispaltcolor = 0
 	return(disptext)
