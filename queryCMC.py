@@ -22,10 +22,14 @@ def retrieveAPI_KEY():
 
 	if 'cmcAPI_KEY' in os.environ:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		API_KEY = os.environ['cmcAPI_KEY'].strip()
 =======
 		API_KEY = os.environ['cmcAPI_KEY']
 >>>>>>> ddee4ce (rebased)
+=======
+		API_KEY = os.environ['cmcAPI_KEY'].strip()
+>>>>>>> 3be638f (strip CR from API-key)
 		print('\n' + API_KEY + '\n')
 		return(API_KEY)
 	else:
