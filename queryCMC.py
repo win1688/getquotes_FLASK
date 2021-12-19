@@ -73,7 +73,6 @@ def getCMCquotesRESTapi(usdrate):
 	apikey = retrieveAPI_KEY()
 	if apikey == None:
 		return(None)
-#	apikey='b24cd75d-db93-4ed2-9a17-f13c4e810c17'
 
 	querycoins = { 
     	           'symbol':'LTC,CAKE,BNB,CRO,DFI,BTC,MATIC' }
