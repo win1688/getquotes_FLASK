@@ -22,11 +22,11 @@ def retrieveAPI_KEY():
 
 	if 'cmcAPI_KEY' in os.environ:
 		API_KEY = os.environ['cmcAPI_KEY']
-#		print('\n' + API_KEY + '\n')
+		print('\n' + API_KEY + '\n')
 		return(API_KEY)
 	else:
-#		print('cmcAPI_KEY missing in .evn file!! Get your own API Key into .env file before running code.\n')
-#		print('Format: cmcAPI_KEY=abcdefuuuddddkkkkgggadkfhakdj  (without quotes and CR) \n')
+		print('cmcAPI_KEY missing in .evn file!! Get your own API Key into .env file before running code.\n')
+		print('Format: cmcAPI_KEY=abcdefuuuddddkkkkgggadkfhakdj  (without quotes and CR) \n')
 		return(None)
 
 def getSGDUSDrate():
@@ -65,7 +65,7 @@ def getCMCquotesRESTapi(usdrate):
 	apikey = retrieveAPI_KEY()
 	if apikey == None:
 		return(None)
-
+#	apikey='b24cd75d-db93-4ed2-9a17-f13c4e810c17'
 
 	querycoins = { 
     	           'symbol':'LTC,CAKE,BNB,CRO,DFI,BTC,MATIC' }
