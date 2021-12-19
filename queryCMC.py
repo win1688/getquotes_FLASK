@@ -21,7 +21,11 @@ def retrieveAPI_KEY():
 		os.environ[line[0:line.find('=')]] = line[line.find('=') + 1:]
 
 	if 'cmcAPI_KEY' in os.environ:
+<<<<<<< HEAD
 		API_KEY = os.environ['cmcAPI_KEY'].strip()
+=======
+		API_KEY = os.environ['cmcAPI_KEY']
+>>>>>>> ddee4ce (rebased)
 		print('\n' + API_KEY + '\n')
 		return(API_KEY)
 	else:
