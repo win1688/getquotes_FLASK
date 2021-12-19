@@ -1,11 +1,13 @@
 from flask import Flask, Blueprint, render_template, request, flash, Markup
 from requests import Request, Session
 from datetime import datetime
+#from backports import zoneinfo
 
 from queryCMC import getCMCquotesRESTapi, getSGDUSDrate
 
 import json
 import pprint
+import pytz
 
 app = Flask(__name__)
 #app.secret_key = "showmethemoney168"
@@ -32,7 +34,9 @@ def altcoins():
 #
 #	Get Current Date/time
 #
-	now = datetime.now()
+	tz = pytz.timezone('Asia/Manila')
+	now = datetime.now(tz)
+
 	dt_string = now.strftime("%d/%m/%Y Timezone GMT+8 : %H:%M:%S")
 	fc = request.form['coin_input'] 
 	cmcquotes = getCMCquotesRESTapi(exUSDSGD)
