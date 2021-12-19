@@ -8,4 +8,4 @@ app.secret_key = "showmethemoney168"
 
 
 if __name__ == "__main__":
-	app.run(port=80)
+	app.run(port=8000)
